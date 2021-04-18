@@ -5,34 +5,52 @@
 }
 
 .GridBox {
-  width: 210px;
-  height: 210px;
-  background-color: mediumturquoise;
-  border-radius: 20px;
-  padding: 10px;
+  margin: 4vw;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  width: 30vw;
+  height: 30vw;
+  background-color: #5aa897;
+
+  box-shadow: 10px 10px 10px #232a38;
+  border: 0.4vw #45526c solid;
+  border-radius: 2vw;
+}
+
+@media screen and (max-width: 768px) {
+  .GridBox {
+    width: 90vw;
+    height: 90vw;
+  }
 }
 
 .Grid {
-  width: 30px;
-  height: 30px;
+  width: 16%;
+  height: 16%;
 
-  margin: 4px;
-  display: inline-block;
+  margin: 2%;
 
-  text-align: center;
-  line-height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  border: 2px darkslategray solid;
-  border-radius: 10px;
+  font-family: monospace;
+  font-size: 2.5vw;
+
+  box-shadow: 0 0 0 0.1vw darkslategray;
+  border-radius: 30%;
 
   user-select: none;
 
-  transition: all;
-  transition-duration: 0.1s;
+  background-color: #f8f5f1;
 }
 
 .Grid:active {
-  transform: translateY(4px);
+  background-color: #f8a488;
+  transform: scale(1.2);
 }
 
 .TimerBox {

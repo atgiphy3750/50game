@@ -28,7 +28,7 @@ const Game = () => {
     firstRange.map((id: number) => ({
       id,
       isCorrect: false,
-      isPressed: false,
+      isClicked: false,
     })),
   );
   const [nextId, setNextId] = React.useState(1);
@@ -82,7 +82,6 @@ const Game = () => {
       } else {
         handleCorrectUpper();
       }
-
       setNextId((number) => number + 1);
     };
 
@@ -104,7 +103,7 @@ const Game = () => {
       }
     };
 
-    return onClick;
+    return onClick();
   };
 
   const grids = gridList.map((grid) => (
@@ -112,7 +111,7 @@ const Game = () => {
       key={grid.id}
       id={grid.id}
       isCorrect={grid.isCorrect}
-      onClick={handleClick(grid.id)}
+      onClick={() => handleClick(grid.id)}
     />
   ));
 
