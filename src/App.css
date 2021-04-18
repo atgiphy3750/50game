@@ -1,3 +1,7 @@
+body {
+  background-color: #e0e0e0;
+}
+
 .App {
   display: flex;
   justify-content: center;
@@ -15,16 +19,9 @@
   height: 30vw;
   background-color: #5aa897;
 
-  box-shadow: 10px 10px 10px #232a38;
-  border: 0.4vw #45526c solid;
-  border-radius: 2vw;
-}
-
-@media screen and (max-width: 768px) {
-  .GridBox {
-    width: 90vw;
-    height: 90vw;
-  }
+  border-radius: 20px;
+  background: #e0e0e0;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
 }
 
 .Grid {
@@ -37,19 +34,19 @@
   justify-content: center;
   align-items: center;
 
-  font-family: monospace;
-  font-size: 2.5vw;
+  color: #e0e0ca;
+  font-family: sans-serif;
+  font-size: 180%;
 
-  box-shadow: 0 0 0 0.1vw darkslategray;
   border-radius: 30%;
 
   user-select: none;
 
-  background-color: #f8f5f1;
+  background-color: #948585;
 }
 
 .Grid:active {
-  background-color: #f8a488;
+  background-color: #cad7e0;
   transform: scale(1.2);
 }
 
@@ -57,4 +54,11 @@
   text-align: center;
   font-family: monospace;
   font-size: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .GridBox {
+    width: 90vw;
+    height: 90vw;
+  }
 }

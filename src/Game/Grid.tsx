@@ -14,7 +14,7 @@ const Grid = ({ id, isCorrect, onClick }: GridProps & HandlerProps) => (
     onClick={() => onClick(id)}
     style={{
       backgroundColor: isCorrect ? '#45526c' : '',
-      color: isCorrect ? '#45526c' : '#1F3B4D',
+      color: isCorrect ? '#45526c' : '#E0E0E0',
     }}
   >
     {id}
