@@ -1,7 +1,7 @@
 import React from 'react';
-import Timer from 'react-compound-timer';
 import Grid from './Grid';
 import type GridProps from './GridProps';
+import TimerBox from './Timer';
 
 const shuffleArray = (array: number[]): void => {
   for (let i = array.length - 1; i > 0; i -= 1) {
@@ -32,8 +32,6 @@ const Game = () => {
     })),
   );
   const [nextId, setNextId] = React.useState(1);
-
-  // Timer
   const timerRef: any = React.useRef(null);
   const timerStart = () => {
     timerRef.current.start();
@@ -45,9 +43,7 @@ const Game = () => {
   // handleClick
   const handleClick = (id: number) => {
     const isStart = () => id === nextId && id === 1;
-
     const isCorrect = () => id === nextId;
-
     const isEnd = () => id === 50;
 
     const handleCorrectLower = () => {
@@ -118,22 +114,7 @@ const Game = () => {
   return (
     <div>
       <div className="GridBox">{grids}</div>
-      <div className="TimerBox">
-        <Timer
-          initialTime={0}
-          timeToUpdate={29}
-          startImmediately={false}
-          ref={timerRef}
-        >
-          <Timer.Minutes formatValue={(t) => t.toString().padStart(2, '0')} />
-          :
-          <Timer.Seconds formatValue={(t) => t.toString().padStart(2, '0')} />
-          .
-          <Timer.Milliseconds
-            formatValue={(t) => t.toString().padStart(3, '0')}
-          />
-        </Timer>
-      </div>
+      <TimerBox timerRef={timerRef} />
     </div>
   );
 };
