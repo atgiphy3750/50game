@@ -1,7 +1,9 @@
 import React from 'react';
+import { useAnimation } from 'framer-motion';
 import Grid from './Grid';
 import type GridProps from './GridProps';
 import TimerBox from './Timer';
+import { isStart, isCorrect, isEnd } from './Compare';
 
 const shuffleArray = (array: number[]): void => {
   for (let i = array.length - 1; i > 0; i -= 1) {
@@ -28,7 +30,7 @@ const Game = () => {
     firstRange.map((id: number) => ({
       id,
       isCorrect: false,
-      isClicked: false,
+      controls: useAnimation(),
     })),
   );
   const [nextId, setNextId] = React.useState(1);
@@ -42,64 +44,37 @@ const Game = () => {
 
   // handleClick
   const handleClick = (id: number) => {
-    const isStart = () => id === nextId && id === 1;
-    const isCorrect = () => id === nextId;
-    const isEnd = () => id === 50;
-
-    const handleCorrectLower = () => {
+    if (isStart(id, nextId)) {
+      timerStart();
+    }
+    if (isCorrect(id, nextId)) {
+      // if correct
       setGridList(
         gridList.map((grid) => {
           if (grid.id === id) {
-            const newId = secondRange[0];
-            // eslint-disable-next-line no-param-reassign
-            grid.id = newId;
-            setSecondRange(secondRange.filter((number) => number !== newId));
+            if (id < 26) {
+              const newId = secondRange[0];
+              // eslint-disable-next-line no-param-reassign
+              grid.id = newId;
+              setSecondRange(secondRange.filter((number) => number !== newId));
+            } else {
+              // eslint-disable-next-line no-param-reassign
+              grid.isCorrect = true;
+            }
           }
           return grid;
         }),
       );
-    };
-
-    const handleCorrectUpper = () => {
-      setGridList(
-        gridList.map((grid) => {
-          if (grid.id === id) {
-            // eslint-disable-next-line no-param-reassign
-            grid.isCorrect = true;
-          }
-          return grid;
-        }),
-      );
-    };
-
-    const handleCorrect = () => {
-      if (nextId < 26) {
-        handleCorrectLower();
-      } else {
-        handleCorrectUpper();
-      }
       setNextId((number) => number + 1);
-    };
 
-    const handleEnd = () => {
-      if (isEnd()) {
+      // if end
+      if (isEnd(nextId)) {
         timerStop();
       }
-    };
 
-    const onClick = () => {
-      if (isStart()) {
-        timerStart();
-      }
-      if (isCorrect()) {
-        handleCorrect();
-        if (isEnd()) {
-          handleEnd();
-        }
-      }
-    };
-
-    return onClick();
+      return true;
+    }
+    return false;
   };
 
   const grids = gridList.map((grid) => (
@@ -107,7 +82,8 @@ const Game = () => {
       key={grid.id}
       id={grid.id}
       isCorrect={grid.isCorrect}
-      onClick={() => handleClick(grid.id)}
+      controls={grid.controls}
+      handleClick={() => handleClick(grid.id)}
     />
   ));
 
