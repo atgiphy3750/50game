@@ -31,16 +31,6 @@ const Grid = ({
   handleClick,
 }: // eslint-disable-next-line arrow-body-style
 GridProps & HandlerProps) => {
-  // const onClick = () => {
-  //   const result = handleClick();
-  //   setTimeout(() => {
-  //     if (result) {
-  //       controls.start('CORRECT');
-  //     } else {
-  //       controls.start('WRONG');
-  //     }
-  //   }, 10);
-  // };
   React.useEffect(() => {
     switch (animation) {
       case 'CORRECT':
@@ -54,7 +44,7 @@ GridProps & HandlerProps) => {
       }
     }
     setAnimation();
-  }, [animation]);
+  });
 
   // eslint-disable-next-line max-len
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
