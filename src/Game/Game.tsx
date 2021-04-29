@@ -31,6 +31,7 @@ const Game = () => {
       id,
       isCorrect: false,
       controls: useAnimation(),
+      animation: 'STOP',
     })),
   );
   const [nextId, setNextId] = React.useState(1);
@@ -61,6 +62,8 @@ const Game = () => {
               // eslint-disable-next-line no-param-reassign
               grid.isCorrect = true;
             }
+            // eslint-disable-next-line no-param-reassign
+            grid.animation = 'CORRECT';
           }
           return grid;
         }),
@@ -74,7 +77,26 @@ const Game = () => {
 
       return true;
     }
+    setGridList(
+      gridList.map((grid) => {
+        if (grid.id === id) {
+          // eslint-disable-next-line no-param-reassign
+          grid.animation = 'WRONG';
+        }
+        return grid;
+      }),
+    );
     return false;
+  };
+
+  const setAnimation = (id: number) => {
+    gridList.map((grid) => {
+      if (grid.id === id) {
+        // eslint-disable-next-line no-param-reassign
+        grid.animation = 'STOP';
+      }
+      return grid;
+    });
   };
 
   const grids = gridList.map((grid) => (
@@ -83,6 +105,8 @@ const Game = () => {
       id={grid.id}
       isCorrect={grid.isCorrect}
       controls={grid.controls}
+      animation={grid.animation}
+      setAnimation={() => setAnimation(grid.id)}
       handleClick={() => handleClick(grid.id)}
     />
   ));
